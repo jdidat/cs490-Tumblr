@@ -9,6 +9,7 @@
 import UIKit
 import AlamofireImage
 class PhotosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
     }
@@ -58,6 +59,13 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! PhotoDetailsViewController
+        let cell = sender as! PhotoCell
+        let indexPath = photoCell.indexPath(for: cell)!
+        photoCell.deselectRow(at: indexPath, animated: true)
+        vc.img = cell.picture.image
+    }
 
     /*
     // MARK: - Navigation
